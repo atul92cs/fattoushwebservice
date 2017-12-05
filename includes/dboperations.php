@@ -25,7 +25,7 @@ class DbOperation
   function getProducts($category)
   {
 	  $stmt=$this->con->prepare("SELECT product_name,product_cost,product_diet FROM products WHERE product_category=?");
-		$stmt->bind_params("s",$category);
+		$stmt->bind_param("s",$category);
 		$stmt->execute();
 		$stmt->bind_result($name,$cost,$diet);
 		$product=array();
