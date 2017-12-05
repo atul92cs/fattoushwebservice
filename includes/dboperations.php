@@ -22,5 +22,24 @@ class DbOperation
 	  }
 	  return $categories;
   }
+  function getProducts($category)
+  {
+	  $stmt=$this->con->prepare("SELECT product_name,product_cost,product_diet FROM products WHERE product_category=?");
+		$stmt->bind_params($category);
+		$stmt->execute();
+		$stmt->bind_result($name,$cost,$diet);
+		$product=array();
+		while($stmt->fetch())
+		{
+			$temp=array();
+			
+			$temp['name']=$name;
+			$temp['cost']=$cost;
+			$temp['diet']=$diet;
+			
+			array_push($product,$temp);
+		}
+		return $product;
+  }
   }
   ?>
