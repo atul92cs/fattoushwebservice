@@ -33,7 +33,7 @@ class DbOperation
 		{
 			$temp=array();
 			
-			$temp['name']=$name;
+			$temp['Name']=$name;
 			$temp['cost']=$cost;
 			$temp['diet']=$diet;
 			
