@@ -18,4 +18,63 @@ $app->get('/products/{category}',function(Request $req,Response $res){
 	 $products=$db->getProducts($category);
 	 $res->getBody()->write(json_encode(array("Products"=>$products)));
 });
+$app->get('/order/{contact}',function(Request $req,Response $res){
+	$contact=$req->getAttribute('contact');
+	$db=new dbOperation();
+	$order_id=$db->getOrderDetails($contact);
+	$res->getBody()->write(json_encode($order_id));
+});
+$app->post('/createOrder',function(Request $req,Response $res){
+	if(isTheseParametersAvailable(array('summary','cost','date','contact','name','address')))
+	{
+		$requestedData=$req->getParsedBody();
+		$summary=$requestedData['summary'];
+		$cost=$requestedData['cost'];
+		$date=$requestedData['date'];
+		$contact=$requestedData['contact'];
+		$name=$requestedData['name'];
+		$address=$requestedData['address'];
+		$status="placed";
+		$db=new dboperation();
+		$result=$db->createOrder($summary,$cost,$date,$contact,$name,$address,$status);
+		$responeData=array();
+		if($result==true)
+		{
+			$responeData['error']=false;
+			$responeData['Message']='Order Placces sucessfully';
+			$responeData['Order no']=getorderDetails($contact);
+		}
+		else
+		{
+			$responseData['error']=true;
+			$responeData['Message']='error occured';
+		}
+		  
+		$response->getBody()->write(json_encode($responseData));
+		}
+});
+  function isTheseParametersAvailable($requiredfields)
+  {
+	  $error=false;
+	  $error_fields="";
+	  $request_params=$_REQUEST;
+	  foreach($requiredfields as $field)
+	  {
+		  if(!isset($request_params[$field])||strlen(trim($request_params[$field]))<=0)
+		  {
+			  $error=true;
+			  $error_fields=$field.',';
+			  
+		  }
+	  }
+	  if($error)
+	  {
+		  $response=array();
+		  $response["error"]=true;
+		  $response["message"]='Required Field(s)'.substr($error_fields,0,-2).'is missing or empty';
+		  echo json_encode($response);
+		  return false;
+	  }
+	  return true;
+  }
 $app->run();

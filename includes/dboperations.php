@@ -41,5 +41,25 @@ class DbOperation
 		}
 		return $product;
   }
+  function createOrder($summary,$cost,$date,$contact,$name,$address,$status)
+  {
+	  $stmt=$this->con->prepare("INSERT INTO orders (order_summary,order_cost,order_date,user_contact,user_name,order_address,orderstatus)VALUES (?,?,?,?,?,?,?)");
+	  $stmt->bind_param("sssssss",$summary,$cost,$date,$contact,$name,$address,$status);
+	  if($stmt->execute())
+		  return true;
+	  return false;
+	  
+   }
+   function getorderDetails($contact)
+   {
+	   $stmt=$this->con->prepare("SELECT MAX(order_id) FROM orders WHERE order_contact =?");
+	   $stmt->bind_param("s",$contact);
+	   $stmt->execute();
+	   $stmt->bind_result($id);
+	   $stmt->fetch();
+	   $order['no']=$id;
+	   return $order;
+	   
+   }
   }
   ?>
