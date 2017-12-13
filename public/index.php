@@ -41,16 +41,16 @@ $app->post('/createOrder',function(Request $req,Response $res){
 		if($result==true)
 		{
 			$responeData['error']=false;
-			$responeData['Message']='Order Placces sucessfully';
-			$responeData['Order no']=getorderDetails($contact);
+			$responeData['Message']='Order Placed sucessfully';
+			$responeData['Orderno']=getorderDetails($contact);
 		}
 		else
 		{
-			$responseData['error']=true;
+			$responeData['error']=true;
 			$responeData['Message']='error occured';
 		}
 		  
-		$response->getBody()->write(json_encode($responseData));
+		$response->getBody()->write(json_encode($responeData));
 		}
 });
   function isTheseParametersAvailable($requiredfields)
