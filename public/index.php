@@ -70,8 +70,8 @@ $app->post('/createOrder',function(Request $req,Response $res){
 	  if($error)
 	  {
 		  $response=array();
-		  $response["error"]=true;
-		  $response["message"]='Required Field(s)'.substr($error_fields,0,-2).'is missing or empty';
+		  $response['error']=true;
+		  $response['message']='Required Field(s)'.substr($error_fields,0,-2).'is missing or empty';
 		  echo json_encode($response);
 		  return false;
 	  }
