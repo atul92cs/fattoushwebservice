@@ -52,7 +52,7 @@ class DbOperation
    }
    function getorderDetails($contact)
    {
-	   $stmt=$this->con->prepare("SELECT MAX(order_id) FROM orders WHERE order_contact =?");
+	   $stmt=$this->con->prepare("SELECT MAX(order_id) FROM orders WHERE user_contact =?");
 	   $stmt->bind_param("s",$contact);
 	   $stmt->execute();
 	   $stmt->bind_result($id);
