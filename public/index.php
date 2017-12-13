@@ -25,8 +25,7 @@ $app->get('/order/{contact}',function(Request $req,Response $res){
 	$res->getBody()->write(json_encode($order_id));
 });
 $app->post('/createOrder',function(Request $req,Response $res){
-	if(isTheseParametersAvailable(array('summary','cost','date','contact','name','address')))
-	{
+	
 		$requestedData=$req->getParsedBody();
 		$summary=$requestedData['summary'];
 		$cost=$requestedData['cost'];
@@ -51,7 +50,7 @@ $app->post('/createOrder',function(Request $req,Response $res){
 		}
 		  
 		$response->getBody()->write(json_encode($responeData));
-		}
+		
 });
   function isTheseParametersAvailable($requiredfields)
   {
