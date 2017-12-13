@@ -41,7 +41,7 @@ $app->post('/createOrder',function(Request $req,Response $res){
 		{
 			$responeData['error']=false;
 			$responeData['Message']='Order Placed sucessfully';
-			$responeData['Orderno']=getorderDetails($contact);
+			$responeData['Orderno']=$db->getorderDetails($contact);
 		}
 		else
 		{
@@ -49,7 +49,7 @@ $app->post('/createOrder',function(Request $req,Response $res){
 			$responeData['Message']='error occured';
 		}
 		  
-		$response->getBody()->write(json_encode($responeData));
+		$res->getBody()->write(json_encode($responeData));
 		
 });
   function isTheseParametersAvailable($requiredfields)
