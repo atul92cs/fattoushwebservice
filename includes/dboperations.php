@@ -43,7 +43,7 @@ class DbOperation
   }
   function createOrder($summary,$cost,$date,$contact,$name,$address,$status)
   {
-	  $stmt=$this->con->prepare("INSERT INTO orders (order_summary,order_cost,order_date,user_contact,user_name,order_address,orderstatus)VALUES (?,?,?,?,?,?,?);");
+	  $stmt=$this->con->prepare("INSERT INTO orders (order_summary,order_cost,order_date,user_contact,user_name,order_address,order_status)VALUES (?,?,?,?,?,?,?);");
 	  $stmt->bind_param("sssssss",$summary,$cost,$date,$contact,$name,$address,$status);
 	   if($stmt->execute())
 		     return true;
