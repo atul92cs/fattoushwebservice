@@ -61,5 +61,14 @@ class DbOperation
 	   return $order;
 	   
    }
+   function getOrderStatus($id)
+   {
+	   $stmt=$this->con->prepare("SELECT order_status FROM orders WHERE order_id=?");
+	   $stmt->bind_param("s",$id);
+	   $stmt->execute();
+	   $stmt->bind_result($status);
+	   $order['status']=$status;
+	   return $order;
+   }
   }
   ?>
