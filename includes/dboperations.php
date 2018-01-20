@@ -67,6 +67,7 @@ class DbOperation
 	   $stmt->bind_param("s",$id);
 	   $stmt->execute();
 	   $stmt->bind_result($status);
+	   $stmt->fetch();
 	   $order['status']=$status;
 	   return $order;
    }
