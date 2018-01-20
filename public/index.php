@@ -12,7 +12,7 @@ $app->get('/categories',function(Request $req,Response $res){
 	 $res->getBody()->write(json_encode(array("Categories"=>$products)));
 	 
  });
- $app->get('status/{id}',function(Request $req,Response $res){
+ $app->get('/status/{id}',function(Request $req,Response $res){
      $id=$req->getAttribute('id');	
 	$db=new dboperation();
 	 $status=$db->getOrderStatus($id);
